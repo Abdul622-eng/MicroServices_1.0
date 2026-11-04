@@ -1,16 +1,39 @@
-// order-service.js
 const express = require('express');
 const axios = require('axios');
+
 const app = express();
 
+const USER_SERVICE_URL =
+  process.env.USER_SERVICE_URL || 'http://localhost:3001';
+
+const PRODUCT_SERVICE_URL =
+  process.env.PRODUCT_SERVICE_URL || 'http://localhost:3002';
+
 app.get('/orders', async (req, res) => {
-  const users = await axios.get('http://localhost:3001/users');
-  const products = await axios.get('http://localhost:3002/products');
-  res.json({
-    user: users.data[0],
-    product: products.data[0],
-    status: 'Order Placed'
-  });
+    try {
+        const users = await axios.get(
+            `${USER_SERVICE_URL}/users`
+        );
+
+        const products = await axios.get(
+            `${PRODUCT_SERVICE_URL}/products`
+        );
+
+        res.json({
+            user: users.data[0],
+            product: products.data[0],
+            status: 'Order Placed'
+        });
+
+    } catch (error) {
+        console.error('Order service error:', error.message);
+
+        res.status(500).json({
+            error: 'Unable to create order'
+        });
+    }
 });
 
-app.listen(3003, () => console.log('Order Service running on port 3003'));
+app.listen(3003, '0.0.0.0', () => {
+    console.log('Order Service running on port 3003');
+});
