@@ -12,22 +12,22 @@ scrape_configs:
     static_configs:
       - targets:
           - node-exporter:9100
-  - job_name: jenkins
-    metrics_path: /prometheus
+
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus/'
+    scrape_interval: 15s
     static_configs:
-      - targets: ["172.31.36.132:8080"]
+      - targets: ['172.17.0.1:8080']
 
   - job_name: blackbox
     metrics_path: /probe
     params:
       module: [http_2xx]
-
     static_configs:
       - targets:
           - http://nginx/users
           - http://nginx/products
           - http://nginx/orders
-
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -37,3 +37,4 @@ scrape_configs:
 
       - target_label: __address__
         replacement: blackbox-exporter:9115
+
