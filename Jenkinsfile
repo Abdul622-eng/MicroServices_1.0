@@ -19,11 +19,11 @@ pipeline {
 
     environment {
 
-        AWS_REGION = 'ap-southeast-1'
+        AWS_REGION = 'ap-southeast-2'
 
-        AWS_ACCOUNT_ID = '515917620484'
+        AWS_ACCOUNT_ID = '670180489167'
 
-        EC2_HOST = '172.31.36.132'
+        EC2_HOST = '172.31.13.49'
 
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
     }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 git branch: 'feature/docker',
                     credentialsId: 'github-credentials',
-                    url: 'https://github.com/PurandharAmbala/MicroServices_1.0.git'
+                    url: 'https://github.com/Abdul622-eng/MicroServices_1.0.git'
             }
         }
 
