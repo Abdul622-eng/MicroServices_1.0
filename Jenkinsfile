@@ -6,7 +6,7 @@ pipeline {
 
         string(
             name: 'IMAGE_TAG',
-            defaultValue: '${BUILD_NUMBER}',
+            defaultValue: "${BUILD_NUMBER}",
             description: 'Docker image version'
         )
 
