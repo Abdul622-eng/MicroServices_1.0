@@ -149,7 +149,7 @@ pipeline {
 
                 withCredentials([
                     sshUserPrivateKey(
-                        credentialsId: 'ec2-deploy-key',
+                        credentialsId: 'pipeline',
                         keyFileVariable: 'SSH_KEY',
                         usernameVariable: 'SSH_USER'
                     )
